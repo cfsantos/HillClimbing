@@ -14,6 +14,7 @@
 		91087CE71ABD0EC70097BB32 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91087CE61ABD0EC70097BB32 /* Images.xcassets */; };
 		91087CEA1ABD0EC70097BB32 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91087CE81ABD0EC70097BB32 /* LaunchScreen.xib */; };
 		91087CF61ABD0EC70097BB32 /* HillClimbingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 91087CF51ABD0EC70097BB32 /* HillClimbingTests.m */; };
+		911930271AE6793E00551BA4 /* GeneticAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 911930261AE6793E00551BA4 /* GeneticAlgorithm.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		91087CEF1ABD0EC70097BB32 /* HillClimbingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HillClimbingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91087CF41ABD0EC70097BB32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91087CF51ABD0EC70097BB32 /* HillClimbingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HillClimbingTests.m; sourceTree = "<group>"; };
+		911930251AE6793E00551BA4 /* GeneticAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneticAlgorithm.h; sourceTree = "<group>"; };
+		911930261AE6793E00551BA4 /* GeneticAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneticAlgorithm.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,8 @@
 				91087CE61ABD0EC70097BB32 /* Images.xcassets */,
 				91087CE81ABD0EC70097BB32 /* LaunchScreen.xib */,
 				91087CD91ABD0EC60097BB32 /* Supporting Files */,
+				911930251AE6793E00551BA4 /* GeneticAlgorithm.h */,
+				911930261AE6793E00551BA4 /* GeneticAlgorithm.m */,
 			);
 			path = HillClimbing;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 				91087CE21ABD0EC70097BB32 /* ViewController.m in Sources */,
 				91087CDF1ABD0EC60097BB32 /* AppDelegate.m in Sources */,
 				91087CDC1ABD0EC60097BB32 /* main.m in Sources */,
+				911930271AE6793E00551BA4 /* GeneticAlgorithm.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +418,7 @@
 				91087CFB1ABD0EC70097BB32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		91087CFC1ABD0EC70097BB32 /* Build configuration list for PBXNativeTarget "HillClimbingTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +427,7 @@
 				91087CFE1ABD0EC70097BB32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
