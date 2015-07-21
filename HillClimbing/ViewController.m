@@ -9,10 +9,18 @@
 #import "ViewController.h"
 #import "GeneticAlgorithm.h"
 
+
 @interface ViewController ()
 
 @property(nonatomic, strong)NSMutableArray *iteractionsForHillClimbing;
 @property(nonatomic, strong)NSMutableArray *iteractionsForSimulatedAnnealing;
+
+@property(nonatomic, strong)NSMutableArray *timesForHillClimbing;
+@property(nonatomic, strong)NSMutableArray *timesForSimulatedAnnealing;
+
+@property(nonatomic, strong)NSMutableArray *valuesForHillClimbing;
+@property(nonatomic, strong)NSMutableArray *valuesForSimulatedAnnealing;
+
 
 @end
 
@@ -27,6 +35,13 @@
     
     self.iteractionsForHillClimbing = [NSMutableArray new];
     self.iteractionsForSimulatedAnnealing = [NSMutableArray new];
+    
+    self.timesForHillClimbing = [NSMutableArray new];
+    self.timesForSimulatedAnnealing = [NSMutableArray new];
+    
+    self.valuesForHillClimbing = [NSMutableArray new];
+    self.valuesForSimulatedAnnealing = [NSMutableArray new];
+    
     
     for (NSInteger counter = 1; counter <= 100; counter++) {
         NSLog(@"------ try %li ------", (long)counter);
@@ -44,7 +59,11 @@
     GeneticAlgorithm *test = [GeneticAlgorithm new];
     [test calculateBestValue];
     
+    NSLog(@"Medium interactions in hillclimbing: %f, time %f result %f" ,[self mediunNumberInArray:self.iteractionsForHillClimbing], [self mediunNumberInArray:self.timesForHillClimbing], [self mediunNumberInArray:self.valuesForHillClimbing]);
     
+    NSLog(@"Medium interactions in SimulatedAnnealing: %f time %f result %f",[self mediunNumberInArray:self.iteractionsForSimulatedAnnealing], [self mediunNumberInArray:self.timesForSimulatedAnnealing], [self mediunNumberInArray:self.valuesForSimulatedAnnealing]);
+    
+    NSLog(@"Medium interactions in genetic algorithm: %f time %f result %f",[self mediunNumberInArray:test.iteractionsForGeneticAlgorithm], [self mediunNumberInArray:test.timesForGeneticAlgorithm], [self mediunNumberInArray:test.valuesForGeneticAlgorithm]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -105,6 +124,7 @@
             initialValue = newTestValue;
             stopCondition = 0;
         } else {
+            
             float chancesToChange = [self randonBetweenMinimunValue:0 andMaximunValue:1];
             float chancesNotToChange = exp((newResult - result)/temperature);
             
@@ -121,6 +141,8 @@
     }
     
     [self.iteractionsForSimulatedAnnealing addObject:@(iteraction)];
+    [self.timesForSimulatedAnnealing addObject:@(-[start timeIntervalSinceNow])];
+    [self.valuesForSimulatedAnnealing addObject:@(result)];
     
     NSLog(@"Best on simulatedAnnealingWithInitialTemperature on iteraction %d temperature %f time %f", iteraction, temperature, -[start timeIntervalSinceNow]);
     
@@ -218,8 +240,18 @@
         iteraction++;
         
     }
-    if (hasLog)
-         NSLog(@"Best result on hillClimbingWithNoSteps found on iteraction %d time %f",iteraction, -[start timeIntervalSinceNow]);
+    
+    
+    
+    if (hasLog){
+        [self.timesForHillClimbing addObject:@(-[start timeIntervalSinceNow])];
+        
+        [self.iteractionsForHillClimbing addObject:@(iteraction)];
+        
+        [self.valuesForHillClimbing addObject:@(result)];
+        NSLog(@"Best result on hillClimbingWithNoSteps found on iteraction %d time %f",iteraction, -[start timeIntervalSinceNow]);
+    }
+    
    
     return result;
 }
@@ -303,48 +335,14 @@
     return seed + [self randonBetweenMinimunValue:-0.1 andMaximunValue:0.1];
 }
 
-#pragma mark - CSV File
-
--(void)createCSVFile{
-//    NSMutableString *strOutput = [NSMutableString stringWithCapacity:1000];
-//    
-//    CkoCsv *csv = [[[CkoCsv alloc] init] autorelease];
-//    
-//    //  Indicate that the 1st row
-//    //  should be treated as column names:
-//    csv.HasColumnNames = YES;
-//    
-//    [csv SetColumnName: [NSNumber numberWithInt: 0] columnName: @"year"];
-//    [csv SetColumnName: [NSNumber numberWithInt: 1] columnName: @"color"];
-//    [csv SetColumnName: [NSNumber numberWithInt: 2] columnName: @"country"];
-//    [csv SetColumnName: [NSNumber numberWithInt: 3] columnName: @"food"];
-//    
-//    [csv SetCell: [NSNumber numberWithInt: 0] col: [NSNumber numberWithInt: 0] content: @"2001"];
-//    [csv SetCell: [NSNumber numberWithInt: 0] col: [NSNumber numberWithInt: 1] content: @"red"];
-//    [csv SetCell: [NSNumber numberWithInt: 0] col: [NSNumber numberWithInt: 2] content: @"France"];
-//    [csv SetCell: [NSNumber numberWithInt: 0] col: [NSNumber numberWithInt: 3] content: @"cheese"];
-//    
-//    [csv SetCell: [NSNumber numberWithInt: 1] col: [NSNumber numberWithInt: 0] content: @"2005"];
-//    [csv SetCell: [NSNumber numberWithInt: 1] col: [NSNumber numberWithInt: 1] content: @"blue"];
-//    [csv SetCell: [NSNumber numberWithInt: 1] col: [NSNumber numberWithInt: 2] content: @"United States"];
-//    [csv SetCell: [NSNumber numberWithInt: 1] col: [NSNumber numberWithInt: 3] content: @"hamburger"];
-//    
-//    //  Write the CSV to a string and display:
-//    NSString *csvDoc;
-//    csvDoc = [csv SaveToString];
-//    [strOutput appendString: csvDoc];
-//    [strOutput appendString: @"\n"];
-//    
-//    BOOL success;
-//    
-//    //  Save the CSV to a file:
-//    success = [csv SaveFile: @"out.csv"];
-//    if (success != YES) {
-//        [strOutput appendString: csv.LastErrorText];
-//        [strOutput appendString: @"\n"];
-//    }
-//
-//    
+-(float)mediunNumberInArray:(NSArray *)array{
+    float returnValue = 0;
+    
+    for (NSNumber *number in array) {
+        returnValue += [number floatValue];
+    }
+    
+    return returnValue/[array count];
 }
 
 

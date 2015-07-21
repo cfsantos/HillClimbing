@@ -22,6 +22,10 @@
 @implementation GeneticAlgorithm
 
 -(void)calculateBestValue{
+    self.iteractionsForGeneticAlgorithm = [NSMutableArray new];
+    self.timesForGeneticAlgorithm = [NSMutableArray new];
+    self.valuesForGeneticAlgorithm = [NSMutableArray new];
+    
     NSMutableArray *fitnessArray = [NSMutableArray new];
     self.triesAfterGetBestDNA = 0;
     
@@ -61,7 +65,7 @@
         position++;
     }
     
-    //try crossover from point 0 to point 7
+    //try crossover from 0 to 100%
     for (int crossoverPoint = 0; crossoverPoint <= 10; crossoverPoint++) {
         
         //try mutagenic factor from 1% to 95%
@@ -85,6 +89,10 @@
                 self.triesAfterGetBestDNA++;
                 iteraction++;
             }
+            
+            [self.iteractionsForGeneticAlgorithm addObject:@(iteraction)];
+            [self.timesForGeneticAlgorithm addObject:@(-[start timeIntervalSinceNow])];
+            [self.valuesForGeneticAlgorithm addObject:@([self functionForExercise:[self numberFromDNASequence:self.bestDNA]])];
             
             NSLog(@" %f best value on iteration %d crossover %d mutagenic %d: %f",-[start timeIntervalSinceNow], iteraction, crossoverPoint, mutagenicFactor, [self functionForExercise:[self numberFromDNASequence:self.bestDNA]]);
             

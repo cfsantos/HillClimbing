@@ -10,6 +10,10 @@
 
 @interface GeneticAlgorithm : NSObject
 
+@property(nonatomic, strong)NSMutableArray *iteractionsForGeneticAlgorithm;
+@property(nonatomic, strong)NSMutableArray *timesForGeneticAlgorithm;
+@property(nonatomic, strong)NSMutableArray *valuesForGeneticAlgorithm;
+
 -(void)calculateBestValue;
 
 @end
